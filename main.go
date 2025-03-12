@@ -22,7 +22,7 @@ func main() {
 	m.SetBody("text/html", "Hoi, zie bijlagen!")
 	m.Attach(file) //pas aan
 
-	d := gomail.NewDialer("smtp.mailersend.net", 587, "MS_gxA32N@trial-3vz9dlenp9nlkj50.mlsender.net", "mssp.WJuVQai.k68zxl2eonelj905.0eKrHVU")
+	d := gomail.NewDialer("smtp.mailersend.net", 587, "name", "password") //change name and password
 
 	// Send the email
 	if err := d.DialAndSend(m); err != nil {
