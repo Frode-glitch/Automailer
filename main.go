@@ -2,11 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"gopkg.in/gomail.v2"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	var file string
 	fmt.Print("give me a full file path: ")
 	fmt.Scan(&file)
@@ -22,7 +30,7 @@ func main() {
 	m.SetBody("text/html", "Hoi, zie bijlagen!")
 	m.Attach(file) //pas aan
 
-	d := gomail.NewDialer("smtp.mailersend.net", 587, "name", "password") //change name and password
+	d := gomail.NewDialer("smtp.mailersend.net", 587, os.Getenv("NAME"), os.Getenv("PASSWORD")) //change name and password
 
 	// Send the email
 	if err := d.DialAndSend(m); err != nil {
